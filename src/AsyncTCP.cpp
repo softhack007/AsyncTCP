@@ -76,7 +76,11 @@ typedef struct {
         };
 } lwip_event_packet_t;
 
+#if defined(ESP_IDF_VERSION) && ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 0, 0)
+static QueueHandle_t _async_queue;
+#else
 static xQueueHandle _async_queue;
+#endif
 static TaskHandle_t _async_service_task_handle = NULL;
 
 
